@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <title>Stock Application</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="myApplication"></div>
+    <div id="firstApplication"></div>
+  </body>
+
+  <script>
+    const { createApp } = Vue;
+    createApp({
+      template: "<h1>This is my First Vue Component</h1>",
+    }).mount("#myApplication");
+
+    createApp({
+      template: "<h1>This is my First Vue Component by TechnoFunnel</h1>",
+    }).mount("#firstApplication");
+  </script>
+</html>
