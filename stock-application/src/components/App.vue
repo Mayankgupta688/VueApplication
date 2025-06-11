@@ -8,6 +8,10 @@
 </template>
 
 <script>
+var a = {a: 10}
+var abc = new Proxy(a, {})
+debugger;
+
   export default {
     data: function() {
       return {
@@ -21,6 +25,7 @@
       }.bind(this), 1000);
     }, methods: {
       increaseCounter: function() {
+        debugger;
         this.userName = "Mayank Gupta"
         this.counter++;
       }, getUserName() {
