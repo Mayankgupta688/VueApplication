@@ -8,14 +8,10 @@
 </template>
 
 <script>
-var a = {a: 10}
-var abc = new Proxy(a, {})
-debugger;
-
   export default {
     data: function() {
       return {
-        userName: "TechnoFunnelMayank ",
+        userName: "Mayank ",
         counter: 0,
         timer: new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds(),
       }
