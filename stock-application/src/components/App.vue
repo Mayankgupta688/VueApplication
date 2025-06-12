@@ -21,7 +21,6 @@
       }.bind(this), 1000);
     }, methods: {
       increaseCounter: function() {
-        debugger;
         this.userName = "Mayank Gupta"
         this.counter++;
       }, getUserName() {

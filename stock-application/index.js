@@ -1,15 +1,6 @@
 import { createApp } from "vue";
 
-import App from "./src/components/App.vue";
+import appComponent from "./src/components/getStockPrice.vue";
 
 // Application Bootstrap
-createApp(App).mount("#myApplication");
-
-
-function abc() {
-  console.log("Hello World!");
-}
-
-var myFunction = () => {
-  console.log("This is Arrow Function")
-}
+createApp(appComponent).mount("#myApplication");
