@@ -1,39 +1,38 @@
 <template>
-  <h1>The Zomato Stock Price is <span :class="className">{{stockPrice}} </span></h1>
+  <h1>The Zomato Stock Price is <span :class="applicationData.className">{{applicationData.stockPrice}} </span></h1>
 </template>
 
 <script>
 
-import axios from "axios"
+  import axios from "axios"
 
-export default  {
-  data() {
-    return {
-      stockPrice: 0,
-      className: "green"
-    }
-  },
-  methods: {
-    comparePrice(oldPrice, stockPrice) {
-      if(oldPrice > stockPrice) {
-        this.className = "red"
-      } else {
-        this.className = "green"
-      }
-    }
-  },
+  import { onMounted, shallowRef } from "vue";
 
-  mounted() {
-    var oldValue = 0;
+  var oldValue = 0;
+
+  var applicationData = shallowRef({
+    stockPrice: 0,
+    className: "green"
+  });
+
+  function comparePrice(oldPrice, stockPrice) {
+    if(oldPrice > stockPrice) {
+      applicationData.value.className = "red"
+    } else {
+      applicationData.value.className = "green"
+    }
+  }
+
+  onMounted(() => {
     setInterval(function() {
       axios.get("https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/Z01").then(response => {
-        oldValue = this.stockPrice;
-        this.stockPrice = response.data.data.pricecurrent;
-        this.comparePrice(oldValue, this.stockPrice);
+        oldValue = applicationData.value.stockPrice;
+        applicationData.value.stockPrice = response.data.data.pricecurrent;
+        comparePrice(oldValue, applicationData.value.stockPrice);
       })
     }.bind(this), 2000);
-  }
-}
+  })
+
 </script>
 
 
