@@ -6,12 +6,9 @@
 
   import axios from "axios"
 
-  import { onMounted, shallowRef } from "vue";
+  import { onMounted, shallowRef, ref } from "vue";
 
   var oldValue = 0;
-
-  var stockPrice = ref(0);
-  var className = ref("green");
 
   var applicationData = shallowRef({
     stockPrice: 0,
