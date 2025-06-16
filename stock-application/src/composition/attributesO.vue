@@ -21,6 +21,10 @@ function updateEmployee() {
   employeeData.value[0].name = "jsfkldhf"
 };
 
+function privateFunction() {
+  console.log("This is a private function");
+}
+
 </script>
 
 <template>
