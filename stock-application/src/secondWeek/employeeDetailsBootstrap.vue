@@ -5,7 +5,7 @@
       <input type="text" v-model="searchText" @input="updateSeachText" /><br/><br/>
     </div>
 
-    <div class="card" v-for="(employee) in computerArray" :key="employee.id">
+    <div class="card" v-for="(employee) in filteredByWatchEmployeeList" :key="employee.id">
       <img :src="imageUrl"
           class="card-img-top" :alt="employee.name" :title="employee.name">
       <block class="card-body">
@@ -24,12 +24,13 @@
 <script setup>
 
 import Axios from "axios";
-import {ref, onMounted, computed} from "vue";
+import {ref, onMounted, computed, watch} from "vue";
 
 var searchText = ref("");
 var imageUrl = "https://media.istockphoto.com/id/1399565382/photo/young-happy-mixed-race-businessman-standing-with-his-arms-crossed-working-alone-in-an-office.jpg?s=612x612&w=0&k=20&c=buXwOYjA_tjt2O3-kcSKqkTp2lxKWJJ_Ttx2PhYe3VM="
 var employeeList = ref([]);
 var filteredEmployeeList = ref([]);
+var filteredByWatchEmployeeList = ref([]);
 
 var computerArray = computed(() => {
   return employeeList.value.filter((employee) => {
@@ -37,10 +38,18 @@ var computerArray = computed(() => {
   })
 });
 
+watch(searchText, (newValue) => {
+  debugger;
+  filteredByWatchEmployeeList.value = employeeList.value.filter((employee) => {
+    return employee.name.indexOf(newValue) > -1;
+  })
+})
+
 onMounted(() => {
   Axios.get("http://localhost:3000/employeeDetails").then((response) => {
     employeeList.value = response.data;
-    filteredEmployeeList.value = response.data
+    filteredEmployeeList.value = response.data;
+    filteredByWatchEmployeeList.value = response.data
   })
 });
 
