@@ -1,25 +1,25 @@
 <template>
-  <h1>
-    This is Main Container {{searchText}}
-  </h1>
+  <div>
+    <h1>
+      This is Main Container {{searchText}}
+    </h1>
 
-  <SearchComponent
-    :searchText="searchText"
-    @update-searchText="updateSearchData">
-  </SearchComponent>
+    <SearchComponent
+      :searchText="searchText"
+      @update-searchText="updateSearchData">
+    </SearchComponent>
 
-  <ListComponent
-    :filterList="filterList"
-    @delete-employee="deleteEmployee"></ListComponent>
+    <ListComponent
+      :filterList="filterList"
+      @delete-employee="deleteEmployee"></ListComponent>
 
-    <AddEmployee @add-employee="fetchData"></AddEmployee>
+      <AddEmployee @add-employee="fetchData"></AddEmployee>
+    </div>
 
 </template>
 
 <script setup>
-import SearchComponent from "./SearchComponent.vue";
-import ListComponent from "./ListComponent.vue";
-import AddEmployee from "./AddEmployee.vue";
+
 import Axios from "axios";
 import { ref, onMounted, watch } from "vue";
 
