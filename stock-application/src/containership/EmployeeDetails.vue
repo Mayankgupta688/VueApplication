@@ -7,14 +7,21 @@
       <p>Department: {{employee.department}}</p>
       <p>Id: {{employee.id}}</p>
     </section>
-    <input type="button" :id="'btn_' + employee.id" class="btn btn-primary" :value='"Delete " + employee.name' />
+    <input type="button" :id="'btn_' + employee.id" class="btn btn-primary" @click="deleteEmployeefromList(employee.id)" :value='"Delete " + employee.name' />
   </block>
 </template>
 
 <script setup>
 var imageUrl = "https://media.istockphoto.com/id/1399565382/photo/young-happy-mixed-race-businessman-standing-with-his-arms-crossed-working-alone-in-an-office.jpg?s=612x612&w=0&k=20&c=buXwOYjA_tjt2O3-kcSKqkTp2lxKWJJ_Ttx2PhYe3VM=";
-import {defineProps} from "vue";
-defineProps(['employee'])
+
+import { defineProps } from "vue";
+
+  var props = defineProps(['employee', 'emit'])
+  var employee = props.employee
+
+function deleteEmployeefromList(empId) {
+  props.emit("delete-employee", empId)
+}
 </script>
 
 <style scoped>
