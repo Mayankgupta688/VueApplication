@@ -5,6 +5,9 @@
     </h1>
 
     <SearchComponent
+      class="search-component"
+      id="searchComponent"
+      style="color: red"
       :searchText="searchText"
       @update-searchText="updateSearchData">
     </SearchComponent>
