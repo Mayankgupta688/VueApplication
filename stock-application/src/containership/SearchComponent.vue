@@ -7,10 +7,10 @@
 </template>
 
 <script setup>
-  import { defineProps, defineEmits } from "vue";
+  import { defineProps, defineEmits,ref } from "vue";
   defineProps(['searchText'])
   var emit = defineEmits(['update-searchText'])
-
+  var someData = ref("someCode");
   function triggerSearchUpdate(event) {
     emit("update-searchText", event.target.value)
   }

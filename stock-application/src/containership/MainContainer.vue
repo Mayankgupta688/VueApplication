@@ -5,12 +5,15 @@
     </h1>
 
     <SearchComponent
+      ref="elementReference"
       class="search-component"
       id="searchComponent"
       style="color: red"
       :searchText="searchText"
       @update-searchText="updateSearchData">
     </SearchComponent>
+
+    <input type="button" value="Observe Element Ref" @click="observeElementRef" /><br/><br/>
 
     <ListComponent
       @delete-employee="deleteEmployee"></ListComponent>
@@ -28,6 +31,12 @@ import { ref, onMounted, watch, provide } from "vue";
 var employeeList = ref([]);
 var filterList = ref([]);
 var searchText = ref("");
+var elementReference = ref(null);
+
+function observeElementRef() {
+  debugger
+  console.dir(elementReference.value);
+}
 
 provide("filterList", filterList)
 
