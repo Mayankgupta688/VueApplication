@@ -13,12 +13,13 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits } from "vue";
+import { defineProps, defineEmits, inject } from "vue";
 defineProps(['filterList'])
 
 import EmployeeDetails from "./EmployeeDetails.vue";
 var emit = defineEmits(['delete-employee']);
-
+var filterList = inject("filterList");
+debugger;
 </script>
 
 <style scoped>

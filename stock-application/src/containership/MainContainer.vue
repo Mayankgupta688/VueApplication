@@ -13,7 +13,6 @@
     </SearchComponent>
 
     <ListComponent
-      :filterList="filterList"
       @delete-employee="deleteEmployee"></ListComponent>
 
       <AddEmployee @add-employee="fetchData"></AddEmployee>
@@ -24,11 +23,13 @@
 <script setup>
 
 import Axios from "axios";
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted, watch, provide } from "vue";
 
 var employeeList = ref([]);
 var filterList = ref([]);
 var searchText = ref("");
+
+provide("filterList", filterList)
 
 function updateSearchData(newSearchText) {
   searchText.value = newSearchText;
@@ -42,8 +43,6 @@ watch(searchText, (newValue) => {
 
 
 function deleteEmployee(employeeId) {
-  debugger;
-
   Axios.delete("http://localhost:3000/employeeDetails/" + employeeId).then(() => {
     fetchData();
   });
