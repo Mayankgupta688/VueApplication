@@ -34,24 +34,6 @@
       "email": "",
       "isEmployeed": true,
       "seniority": ""
-    },
-    {
-      "id": "100sadsasdas",
-      "name": "Mayank",
-      "position": "Trainer",
-      "department": "IT",
-      "email": "",
-      "isEmployeed": true,
-      "seniority": ""
-    },
-    {
-      "id": "sada",
-      "name": "Mayanksdad",
-      "position": "Trainer",
-      "department": "IT",
-      "email": "",
-      "isEmployeed": true,
-      "seniority": ""
     }
   ]
 }

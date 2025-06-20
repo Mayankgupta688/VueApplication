@@ -1,8 +1,11 @@
 <template>
-  <div class="add_employee" @click="clickedEvent">
-    <h1>Please add New Employee</h1><br/>
-    <h2>Is Employeed: {{employeeDetails.isEmployeed}}</h2><br/><br/>
+  <div class="add_employee">
+    <h1>Please add New Employee {{ timer }}</h1><br/>
+    <h2>Is Employeed: {{employeeDetails.isEmployeed}}</h2>
+    <h3>Count  {{ count }}</h3><br/><br/>
 
+
+    <input type="button" value="UpdateCounter" @click="updateCount" /><br/><br/>
 
 
 
@@ -36,8 +39,10 @@
 
   import {ref, defineEmits} from "vue";
   import Axios from "axios";
+  import trackTimer from "./trackTimer.js";
 
   var emit = defineEmits(['add-employee'])
+  var { timer, count, updateCount } = trackTimer()
 
   function mouseOverEvent() {
     alert("Div Clicked....")

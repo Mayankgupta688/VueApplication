@@ -1,24 +1,16 @@
 import "bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { createApp } from "vue";
-import { createRouter, createWebHistory } from "vue-router";
 
-import HomeComponent from "./src/singlePage/HomeComponent.vue";
-import HelpComponent from "./src/singlePage/HelpComponent.vue";
-import AboutComponent from "./src/singlePage/AboutComponent.vue";
-import EmployeeList from "./src/singlePage/EmployeeList.vue";
+import AppComponent from "./src/containership/MainContainer.vue";
+import { createPinia } from "pinia";
 
-import appComponent from "./src/singlePage/App.vue";
+var app = createApp(AppComponent);
 
-var appRoutes = [
-  {path: "/", name: "Home", component: HomeComponent},
-  {path: "/help", name: "Help", component: HelpComponent},
-  {path: "/about", name: "About", component: AboutComponent},
-  {path: "/employee/:employeeId", name: "EmployeeList", component: EmployeeList}
-]
+// app.config.errorHandler = (err) => {
+//   var errorDetails = JSON.parse(err.message)
+//   console.log(errorDetails.name);
+//   console.log("This application has got error.... Just log this error data")
+// }
 
-var router = createRouter({
-  history: createWebHistory(),
-  routes: appRoutes
-})
-
-createApp(appComponent).use(router).mount("#myApplication");
+app.use(createPinia()).mount("#myApplication");

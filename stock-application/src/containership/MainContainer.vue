@@ -1,8 +1,10 @@
 <template>
   <div>
     <h1>
-      This is Main Container {{searchText}}
+      This is Main Container {{timer}}
     </h1>
+
+    <h2>The Counter Value is {{count}}</h2>
 
     <SearchComponent
       ref="elementReference"
@@ -13,7 +15,7 @@
       @update-searchText="updateSearchData">
     </SearchComponent>
 
-    <input type="button" value="Observe Element Ref" @click="observeElementRef" /><br/><br/>
+    <input type="button" value="UpdateCounter" @click="updateCount" /><br/><br/>
 
     <ListComponent
       @delete-employee="deleteEmployee"></ListComponent>
@@ -26,16 +28,36 @@
 <script setup>
 
 import Axios from "axios";
-import { ref, onMounted, watch, provide } from "vue";
+import { ref, onMounted, watch, provide, defineAsyncComponent } from "vue";
+import { storeToRefs } from "pinia";
 
-var employeeList = ref([]);
+import useEmployeeStore from "../stores/employeeStore";
+
+var ListComponent = defineAsyncComponent(() => {
+  return import("../containership/ListComponent.vue");
+});
+
+var AddEmployee = defineAsyncComponent(() => {
+  return import("../containership/AddEmployee.vue");
+});
+
+var SearchComponent = defineAsyncComponent(() => {
+  return import("../containership/SearchComponent.vue");
+});
+
+import trackTimer from "./trackTimer.js"
+
+var { employeeList } = storeToRefs(useEmployeeStore());
+
+debugger;
+
 var filterList = ref([]);
 var searchText = ref("");
 var elementReference = ref(null);
+var { timer, count, updateCount } = trackTimer()
 
 function observeElementRef() {
-  debugger
-  console.dir(elementReference.value);
+  console.dir(elementReference);
 }
 
 provide("filterList", filterList)
@@ -51,6 +73,12 @@ watch(searchText, (newValue) => {
 })
 
 
+watch(employeeList, () => {
+  debugger;
+  filterList.value = employeeList.value
+})
+
+
 function deleteEmployee(employeeId) {
   Axios.delete("http://localhost:3000/employeeDetails/" + employeeId).then(() => {
     fetchData();
@@ -59,16 +87,13 @@ function deleteEmployee(employeeId) {
 
 
 function fetchData() {
-  Axios.get("http://localhost:3000/employeeDetails").then((response) => {
-    employeeList.value = response.data;
-    filterList.value = response.data;
-  })
+  // Axios.get("http://localhost:3000/employeeDetails").then((response) => {
+  //   employeeList.value = response.data;
+  //   filterList.value = response.data;
+  // })
 }
 
 onMounted(() => {
-  Axios.get("http://localhost:3000/employeeDetails").then((response) => {
-    employeeList.value = response.data;
-    filterList.value = response.data;
-  })
+  filterList.value = employeeList.value;
 });
 </script>
